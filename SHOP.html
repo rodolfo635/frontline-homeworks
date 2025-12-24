@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a class="brand" href="#">FRONTLINE</a>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-container">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="hero-bg-layer layer-a"></div>
+            <div class="hero-bg-layer layer-b"></div>
+            <div class="hero-bg-overlay"></div>
+        </div>
+
+        <p class="kicker"><b>WELCOME TO</b></p>
+        <h1>FRONTLINE HOMEWORKS</h1>
+        <div class="hero-actions">
+            <a class="btn" href="https://frontlineweb.cloud254.com">SHOP NOW</a>
+        </div>
+    </header>
+
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>SHOP WITH FRONTLINE FROM START</h2>
+                <p>Discover FRONTLINE HOMEWORKS, your ultimate resource for building and improving your home. From essential tools to expert tips, we're here to help DIY enthusiasts and professionals create the perfect space. Start your home project today and turn your vision into reality!</p>
+            </div>
+            <div class="about-image">
+                <img src="【Durable and Strong】 drawer runners are made of…(1).jpg" alt="Home building tools">
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="content-container">
+       
+    <div class="image-slider">
+        <div class="slides">
+            <img src="Tolsen Tools - Canton Fair.jfif" alt="slide 1">
+            <img src="17+ Logo Stanley Png.jpg" alt="slide 2">
+            <img src="INGCO TOOLS _ Power tools design, Tool design….jfif" alt="slide 3">
+        </div>
+        <button class="prev" aria-label="Previous">‹</button>
+        <button class="next" aria-label="Next">›</button>
+         <h2>Making Work easier For You And Better</h2>
+        <p>FRONTLINE is designed to streamline your workflow and enhance productivity. Explore our features and see how we can help you achieve more with less effort.</p>
+    
+
+    </div>
+</section>
+    <!-- About Image Slider Section (matching other sliders) -->
+    <section class="about-slider-section">
+        <div class="image-slider about-image-slider">
+            <div class="slides">
+                <img src="NORDIC Solid Brass Kitchen & Cabinet Pull Handle - Length_110mm (CC_96mm) _ Black-Gold.jpg" alt="About Slide 1">
+                <img src="KAK 2PCS Hidden Door Handles Zinc Alloy Recessed Pull Sliding Door Handles Bedroom Door Cabinet Handle Furniture Handle Hardware - AliExpress 13.jpg" alt="About Slide 2">
+                <img src="Alpine Hardware Solid Stainless Steel Euro Bar Cabinet Handle Drawer Pull (1_2-inch Diameter), 10-inch Length (7_50-inch Hole Centre) gray _ Wayfair Canada.jpg" alt="About Slide 3">
+                <img src="5 1_16_ Center to Center Handle Pull Multipack (Set of 45) Finish_ Silver.jpg" alt="About Slide 4">
+                <img src="Black Gold Cupboard Handle – Brushed Stainless Steel Bar Pull for Cabinets & Drawers - 20 inch 320mm.jpg" alt="About Slide 5">
+            </div>
+            <button class="prev" aria-label="Previous">‹</button>
+            <button class="next" aria-label="Next">›</button>
+        </div>
+    </section>
+<section class="locks-section">
+  <div class="locks-container">
+
+    <!-- LEFT: Image Slider -->
+    <div class="slider">
+      <img src="Assa Abloy Logo Vector File Free Download _ Logowik.jpg" class="slide active" alt="Security Lock 1">
+      <img src="Add a little extra security to your home with this….jpg" class="slide" alt="Security Lock 2">
+      <img src="CONNEL Solid Brass Door Lever Handle Set - Luxury….jpg" class="slide" alt="Security Lock 3">
+    </div>
+
+    <!-- RIGHT: Content -->
+    <div class="locks-content">
+      <h1>🔐 Strong Security Locks You Can Trust</h1>
+      <p class="subtitle">Protect your home, shop, and office with confidence.</p>
+
+      <p class="description">
+        Our security locks are built to keep you safe and worry-free.
+        Strong, reliable, and easy to use every day.
+      </p>
+
+      <ul class="features">
+        <li>✔ Strong & durable – hard to break</li>
+        <li>✔ Reliable security</li>
+        <li>✔ Smooth locking system</li>
+        <li>✔ Weather resistant</li>
+        <li>✔ Long-lasting quality</li>
+      </ul>
+
+      <p class="use">
+        <strong>Perfect for:</strong> Homes • Shops • Offices • Gates • Doors
+      </p>
+
+      <button class="cta">Secure What Matters Most 🔒</button>
+    </div>
+
+  </div>
+</section>
+
+        <script>
+    // Lock section slider (single image fade)
+    let slides = document.querySelectorAll(".slide");
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+    }, 3000); // change image every 3 seconds
+  
+    // About image slider (carousel style)
+    (function(){
+        const aboutSlider = document.querySelector('.about-image-slider');
+        if (!aboutSlider) return;
+        const slides = aboutSlider.querySelector('.slides');
+        const imgs = aboutSlider.querySelectorAll('.slides img');
+        const total = imgs.length;
+        let idx = 0;
+        function show(i){
+            slides.style.transform = `translateX(${-i * 100}%)`;
+        }
+        aboutSlider.querySelector('.next').addEventListener('click', ()=>{ idx = (idx + 1) % total; show(idx); resetTimer(); });
+        aboutSlider.querySelector('.prev').addEventListener('click', ()=>{ idx = (idx - 1 + total) % total; show(idx); resetTimer(); });
+        let timer = setInterval(()=>{ idx = (idx + 1) % total; show(idx); }, 3000);
+        function resetTimer(){ clearInterval(timer); timer = setInterval(()=>{ idx = (idx + 1) % total; show(idx); }, 3000); }
+        // ensure correct initial layout
+        show(0);
+    })();
+</script>
+    <script>
+        (function(){
+            const slides = document.querySelector('.slides');
+            const imgs = document.querySelectorAll('.slides img');
+            const total = imgs.length;
+            let idx = 0;
+            function show(i){
+                slides.style.transform = `translateX(${ -i * 100 }%)`;
+            }
+            document.querySelector('.next').addEventListener('click', ()=>{ idx = (idx + 1) % total; show(idx); resetTimer(); });
+            document.querySelector('.prev').addEventListener('click', ()=>{ idx = (idx - 1 + total) % total; show(idx); resetTimer(); });
+            let timer = setInterval(()=>{ idx = (idx + 1) % total; show(idx); }, 3000);
+            function resetTimer(){ clearInterval(timer); timer = setInterval(()=>{ idx = (idx + 1) % total; show(idx); }, 3000); }
+            // ensure correct initial layout
+            show(0);
+        })();
+    </script>
+
+    <script>
+        (function(){
+            const hero = document.querySelector('.hero-container');
+            if(!hero) return;
+            const layerA = hero.querySelector('.layer-a');
+            const layerB = hero.querySelector('.layer-b');
+            const images = [
+                
+                'download (2).jfif',
+                'download (4).jfif',
+                'download (5).jfif',
+                
+    
+                
+            ];
+            let idx = 0;
+            let showingA = true;
+
+            // preload images for smoother transitions
+            images.forEach(src => { const i = new Image(); i.src = src; });
+
+            // initial backgrounds
+            layerA.style.backgroundImage = `url('${images[0]}')`;
+            layerA.classList.add('visible');
+            layerB.style.backgroundImage = `url('${images[1 % images.length]}')`;
+
+            function nextBg(){
+                const nextIdx = (idx + 1) % images.length;
+                const incoming = showingA ? layerB : layerA;
+                const outgoing = showingA ? layerA : layerB;
+                incoming.style.backgroundImage = `url('${images[nextIdx]}')`;
+                // crossfade using opacity
+                requestAnimationFrame(()=>{
+                    incoming.classList.add('visible');
+                    outgoing.classList.remove('visible');
+                });
+                showingA = !showingA;
+                idx = nextIdx;
+            }
+
+            // cycle every 4.5s
+            let timer = setInterval(nextBg, 4500);
+            hero.addEventListener('mouseenter', ()=> clearInterval(timer));
+            hero.addEventListener('mouseleave', ()=> { timer = setInterval(nextBg, 4500); });
+        })();
+    </script>
+
+    <script>
+        (function(){
+            const btn = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            if(!btn || !links) return;
+
+            btn.addEventListener('click', function(){
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                links.classList.toggle('show');
+            });
+
+            // close menu when clicking outside
+            document.addEventListener('click', function(e){
+                if(!links.classList.contains('show')) return;
+                if(e.target.closest('.site-nav')) return;
+                links.classList.remove('show');
+                btn.setAttribute('aria-expanded','false');
+            });
+        })();
+    </script>
+
+   
+
+   
+    <section id="products" class="products">
+        <h2>Products</h2>
+        <div class="products-grid">
+            <article class="product-card bg-image">
+                <h3>STANLEY PRODUCTS</h3>
+                
+                <a class="btn" href="https://frontlineweb.cloud254.com">View</a>
+            </article>
+
+            <article class="product-card">
+                <img src="ROUTER.jfif" alt="Product 2">
+                <h3>BOSCH PRODUCT</h3>
+                
+                <a class="btn" href="#">View</a>
+            </article>
+
+            <article class="product-card">
+                <img src="INGCO.jfif" alt="Product 3">
+                <h3>INGCO PRODUCTS</h3>
+                
+                <a class="btn" href="https://frontlineweb.cloud254.com">View</a>
+            </article>
+
+            <article class="product-card">
+                <img src="DCA.jfif" alt="Product 4">
+                <h3>DCA PRODUCTS</h3>
+                
+                <a class="btn" href="https://frontlineweb.cloud254.com">View</a>
+            </article>
+        </div>
+    </section>
+
+            <section id="features" class="features">
+                    <h2>Features</h2>
+                    <div class="features-grid">
+                        <article class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Fast Performance</h3>
+                            <p>Optimized to deliver quick results so you can get more done.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Secure</h3>
+                            <p>Built with security best practices to keep your data safe.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">💡</div>
+                            <h3>Intuitive</h3>
+                            <p>User-friendly interfaces and clear workflows to reduce friction.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon">🤝</div>
+                            <h3>24/7 Support</h3>
+                            <p>Reliable support to help you when you need it most.</p>
+                        </article>
+                    </div>
+                </section>
+
+    <!-- Brands Section -->
+    <section class="brands-section">
+        <h2 class="brands-title">Our Brands</h2>
+        <div class="brands-container">
+            <a class="brand-btn" href="https://www.stanleytools.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">STANLEY</span>
+            </a>
+            <a class="brand-btn" href="https://www.dewalt.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">DEWALT</span>
+            </a>
+            <a class="brand-btn" href="https://www.makita.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">MAKITA</span>
+            </a>
+            <a class="brand-btn" href="https://www.ingcotools.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">INGCO</span>
+            </a>
+            <a class="brand-btn" href="https://www.totalequipment.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">TOTAL</span>
+            </a>
+            <a class="brand-btn" href="https://www.tolsentools.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">TOLSEN</span>
+            </a>
+            <a class="brand-btn" href="https://www.handle-shop.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">HANDLES</span>
+            </a>
+             <a class="brand-btn" href="https://www.bosch.com/" target="_blank">
+                <span style="font-size: 22px; font-weight: 700; color: #ffd166; text-shadow: 0 2px 8px rgba(255,209,102,0.3);">BOSCH</span>
+            </a>
+            
+        </div>
+    </section>
+        </div>
+    
+<section id="location" class="location">
+        <h2>Location</h2>
+        <p>Our office is located at 123 Example Street — replace with your address.</p>
+    </section>
+
+    <footer id="footer" class="footer-container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>FRONTLINE is committed to delivering innovative solutions that streamline workflows and enhance productivity for professionals worldwide.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Pages</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#products">Products</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Business Tools</a></li>
+                    <li><a href="#">Productivity</a></li>
+                    <li><a href="#">Integration</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:info@frontline.com">info@frontline.com</a></p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Example Street<br>City, State 12345</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get the latest updates and exclusive offers.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 FRONTLINE. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

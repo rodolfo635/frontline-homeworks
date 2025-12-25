@@ -12,10 +12,6 @@
         <div class="nav-inner">
             <a class="brand" href="#">FRONTLINE</a>
 
-            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">
-                <span class="hamburger"></span>
-            </button>
-
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#features">Features</a></li>
@@ -23,8 +19,21 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#location">Location</a></li>
             </ul>
+
+            <div class="nav-actions">
+                <form class="search-form" role="search" aria-label="Site search" onsubmit="event.preventDefault();">
+                    <input class="search-input" type="search" name="q" placeholder="Search…" aria-label="Search">
+                    <button class="search-button" type="submit" aria-label="Submit search">Search</button>
+                </form>
+                <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
         </div>
     </nav>
+
+    <!-- Search empty state banner -->
+    <div class="search-empty hidden" role="status" aria-live="polite">No results found</div>
 
     <header class="hero-container">
         <div class="hero-bg" aria-hidden="true">
@@ -237,6 +246,61 @@
         })();
     </script>
 
+    <script>
+        // Navbar search: filters Products, Features, Brands + empty state
+        (function(){
+            const form = document.querySelector('.search-form');
+            const input = form ? form.querySelector('.search-input') : null;
+            const emptyBanner = document.querySelector('.search-empty');
+            if(!form || !input) return;
+
+            const products = Array.from(document.querySelectorAll('.products .product-card'));
+            const features = Array.from(document.querySelectorAll('.features .feature-card'));
+            const brands = Array.from(document.querySelectorAll('.brands-container .brand-btn'));
+
+            function text(el){ return (el.textContent || '').toLowerCase(); }
+            function matchHeading(el){ const h = el.querySelector('h3'); return h ? h.textContent.toLowerCase() : text(el); }
+
+            function applyFilter(q){
+                const query = (q || '').trim().toLowerCase();
+                const noQuery = query.length === 0;
+
+                products.forEach(el => {
+                    const ok = noQuery || matchHeading(el).includes(query) || text(el).includes(query);
+                    el.classList.toggle('hidden', !ok);
+                });
+
+                features.forEach(el => {
+                    const ok = noQuery || matchHeading(el).includes(query) || text(el).includes(query);
+                    el.classList.toggle('hidden', !ok);
+                });
+
+                brands.forEach(el => {
+                    const ok = noQuery || text(el).includes(query);
+                    el.classList.toggle('hidden', !ok);
+                });
+
+                const visibleCount = (
+                    document.querySelectorAll('.product-card:not(.hidden)').length +
+                    document.querySelectorAll('.feature-card:not(.hidden)').length +
+                    document.querySelectorAll('.brand-btn:not(.hidden)').length
+                );
+                if(emptyBanner){ emptyBanner.classList.toggle('hidden', visibleCount > 0); }
+            }
+
+            input.addEventListener('input', () => applyFilter(input.value));
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                applyFilter(input.value);
+                const firstVisible = document.querySelector('.product-card:not(.hidden), .brand-btn:not(.hidden), .feature-card:not(.hidden)');
+                if(firstVisible){
+                    const section = firstVisible.closest('.products, .brands-section, .features');
+                    if(section){ section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+                }
+            });
+        })();
+    </script>
+
    
 
    
@@ -336,7 +400,22 @@
     
 <section id="location" class="location">
         <h2>Location</h2>
-        <p>Our office is located at 123 Example Street — replace with your address.</p>
+        <p>
+            Gikomba, kamkunji Road — Building near Mount Kenya Building, Nairobi.
+        </p>
+        <div class="map-container">
+            <iframe
+                class="map-iframe"
+                title="Frontline Homeworks Location"
+                src="https://maps.google.com/maps?q=Gikomba%20kamkunji%20Road%20near%20Mount%20Kenya%20Building%2C%20Nairobi&z=16&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="map-actions" aria-label="map actions">
+            <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gikomba%20Ladhie%20Road%20near%20Mount%20Kenya%20Building%2C%20Nairobi">Open in Google Maps</a>
+        </div>
     </section>
 
     <footer id="footer" class="footer-container">
@@ -347,7 +426,7 @@
             </div>
 
             <div class="footer-col">
-                <h3>Pages</h3>
+                <h3>Pages</h3>s
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -371,6 +450,23 @@
                 <p>Email: <a href="mailto:info@frontline.com">info@frontline.com</a></p>
                 <p>Phone: +1 (555) 123-4567</p>
                 <p>Address: 123 Example Street<br>City, State 12345</p>
+                <div class="socials">
+                    <a class="social-link social-fb" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.07C22 6.55 17.52 2.07 12 2.07S2 6.55 2 12.07c0 4.98 3.65 9.11 8.43 9.94v-7.03H8.08v-2.91h2.35V9.85c0-2.32 1.38-3.61 3.49-3.61.99 0 2.03.18 2.03.18v2.24h-1.15c-1.13 0-1.49.7-1.49 1.42v1.71h2.53l-.4 2.91h-2.13v7.03C18.35 21.18 22 17.05 22 12.07z"></path></svg>
+                    </a>
+                    <a class="social-link social-ig" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c2.7 0 3.04.01 4.11.06 1.06.05 1.79.22 2.42.47.66.26 1.2.62 1.73 1.15.53.53.89 1.07 1.15 1.73.25.63.42 1.36.47 2.42.05 1.07.06 1.41.06 4.11s-.01 3.04-.06 4.11c-.05 1.06-.22 1.79-.47 2.42-.26.66-.62 1.2-1.15 1.73-.53.53-1.07.89-1.73 1.15-.63.25-1.36.42-2.42.47-1.07.05-1.41.06-4.11.06s-3.04-.01-4.11-.06c-1.06-.05-1.79-.22-2.42-.47-.66-.26-1.2-.62-1.73-1.15-.53-.53-.89-1.07-1.15-1.73-.25-.63-.42-1.36-.47-2.42C2.01 15.04 2 14.7 2 12s.01-3.04.06-4.11c.05-1.06.22-1.79.47-2.42.26-.66.62-1.2 1.15-1.73.53-.53 1.07-.89 1.73-1.15.63-.25 1.36-.42 2.42-.47C8.96 2.01 9.3 2 12 2zm0 3.2c-2.63 0-2.94.01-3.98.06-.96.04-1.48.2-1.83.34-.46.18-.8.4-1.16.76-.36.36-.58.7-.76 1.16-.14.35-.3.87-.34 1.83-.05 1.04-.06 1.35-.06 3.98s.01 2.94.06 3.98c.04.96.2 1.48.34 1.83.18.46.4.8.76 1.16.36.36.7.58 1.16.76.35.14.87.3 1.83.34 1.04.05 1.35.06 3.98.06s2.94-.01 3.98-.06c.96-.04 1.48-.2 1.83-.34.46-.18.8-.4 1.16-.76.36-.36.58-.7.76-1.16.14-.35.3-.87.34-1.83.05-1.04.06-1.35.06-3.98s-.01-2.94-.06-3.98c-.04-.96-.2-1.48-.34-1.83-.18-.46-.4-.8-.76-1.16-.36-.36-.7-.58-1.16-.76-.35-.14-.87-.3-1.83-.34-1.04-.05-1.35-.06-3.98-.06zm0 3.3a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zm5.1-1.7a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg>
+                    </a>
+                    <a class="social-link social-x" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4.5l5.4 7.4L17.6 3H21l-7.2 9.6L21 21h-4.5l-5.7-7.8L6.4 21H3l7.6-10.2L3 3z"></path></svg>
+                    </a>
+                    <a class="social-link social-yt" href="#" target="_blank" rel="noopener" aria-label="YouTube">
+                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2c0-1.7-1.4-3.1-3.1-3.1C17.6 3.9 12 3.9 12 3.9s-5.6 0-7.9.2C2.4 4.1 1 5.5 1 7.2 1 9 1 12 1 12s0 3 .1 4.8c0 1.7 1.4 3.1 3.1 3.1 2.3.2 7.9.2 7.9.2s5.6 0 7.9-.2c1.7 0 3.1-1.4 3.1-3.1C23 15 23 12 23 12s0-3-.1-4.8zM9.7 15.3V8.7L15.3 12l-5.6 3.3z"></path></svg>
+                    </a>
+                    <a class="social-link social-wa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A10 10 0 0 0 3.4 18.6L2 22l3.5-1.3A10 10 0 0 0 12 22c5.5 0 10-4.5 10-10 0-2.6-1-5.2-2.9-7zm-8.5 16.4c-1.7 0-3.3-.5-4.6-1.4l-.3-.2-2.7.9.9-2.6-.2-.3A8 8 0 1 1 12 19.9zm4.6-4.6c-.2-.1-1.3-.7-1.5-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.9.9-.2.2-.3.2-.6.1-1.1-.5-2.1-1.1-2.9-2-.8-.9-1.5-1.9-2-3-.1-.2 0-.4.1-.6.1-.2.7-.5.9-.7.2-.2.3-.4.4-.6.1-.2 0-.4 0-.6 0-.2-.6-1.5-.8-1.7-.2-.2-.4-.2-.6-.2h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.2 3.3c.2.3 2.2 3.4 5.3 4.8.7.3 1.2.5 1.6.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.3-.3-.4-.5-.5z"></path></svg>
+                    </a>
+                </div>
             </div>
 
             <div class="footer-col">

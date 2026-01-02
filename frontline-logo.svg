@@ -1,0 +1,12 @@
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Yellow background (left) -->
+  <rect x="0" y="0" width="250" height="500" fill="#FFFF00"/>
+  
+  <!-- Black background (right) -->
+  <rect x="250" y="0" width="250" height="500" fill="#000000"/>
+  
+  <!-- FRONTLINE text centered -->
+  <text x="250" y="280" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="#000000" opacity="0.9">
+    FRONTLINE
+  </text>
+</svg>
